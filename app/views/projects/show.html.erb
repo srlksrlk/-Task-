@@ -1,0 +1,29 @@
+<h2>★<%= @project.title %></h2><br>
+
+  <%= @project.tasks.each do |task| %>
+    <%= check_box_tag '', '', task.done,
+    {'data-id' => task.id, 'data-project_id' => task.project_id} %>
+    <%= task.title %>　　　　　
+    <%= link_to "SUCCESS!", project_task_path(task.project_id, task.id),
+    method: :delete, data: {confirm: "削除してよろしいですか？"}, :class => 'btn btn-xs btn-info' %><br><br>
+  <% end %>
+
+<br><br>
+
+<%= form_for [@project, @project.tasks.build] do |f| %>
+  <div class="col-xs-7 col-sm-7 col-md-7">
+  <%= f.text_field :title, placeholder: "やることを入力", :class => 'form-control' %>
+  </div>
+  <%= f.submit class: "btn btn-primary"%>
+<% end %><br>
+
+
+<script>
+$(function() {
+  $("input[type=checkbox]").click(function() {
+      $.post('/projects/'+$(this).data('project_id')+'/tasks/'
+      +$(this).data('id')+'/toggle');
+  });
+});
+
+</script>

@@ -1,0 +1,12 @@
+<!-- ここに記述するのは、bodyの中身だけでよい -->
+
+<%= form_for @project do |f| %>
+<div class="form-group">
+  <%= f.label :title %><br>
+  <%= f.text_field :title, placeholder: "やることを入力", :class => 'form-control' %>
+  <% if @project.errors.any? %>
+  <%= @project.errors.messages[:title][0] %>
+  <% end %>
+</div>
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>

@@ -1,0 +1,7 @@
+<!-- ここに記述するのは、bodyの中身だけでよい -->
+<h1>Projests</h1>
+<ul>
+	<% @projects.each do |project| %>　　<!-- Rubyの制御構造をかける -->
+	<li><%= link_to project.title, project_path(project.id) %></li>　　<!-- 式を評価して内容を表示 -->
+	<% end %>
+</ul>
